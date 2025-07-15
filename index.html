@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Tuition Guru Nepal - Find Best Private Tutors & Post Vacancies in Kathmandu Valley</title>
+    <meta name="description" content="Connect with top home tutors in Nepal for all subjects and grades. Post tuition vacancies or find private tutoring jobs in Kathmandu Valley and online. Achieve academic excellence with Home Tuition Guru.">
+    <meta name="keywords" content="home tuition Nepal, private tutor Nepal, tutor Kathmandu Valley, online tuition Nepal, find tutor Nepal, tuition vacancy Nepal, academic excellence Nepal, best home tutors Nepal">
+    
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.yourwebsite.com/"> <!-- Replace with your actual website URL -->
+    <meta property="og:title" content="Home Tuition Guru Nepal - Find Best Private Tutors & Post Vacancies">
+    <meta property="og:description" content="Connect with top home tutors in Nepal for all subjects and grades. Post tuition vacancies or find private tutoring jobs in Kathmandu Valley and online. Achieve academic excellence with Home Tuition Guru.">
+    <meta property="og:image" content="https://www.yourwebsite.com/photo/logo.jpg"> <!-- Replace with your actual logo image URL -->
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.yourwebsite.com/"> <!-- Replace with your actual website URL -->
+    <meta property="twitter:title" content="Home Tuition Guru Nepal - Find Best Private Tutors & Post Vacancies">
+    <meta property="twitter:description" content="Connect with top home tutors in Nepal for all subjects and grades. Post tuition vacancies or find private tutoring jobs in Kathmandu Valley and online. Achieve academic excellence with Home Tuition Guru.">
+    <meta property="twitter:image" content="https://www.yourwebsite.com/photo/logo.jpg"> <!-- Replace with your actual logo image URL -->
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Light blue-gray background */
+        }
+        /* Custom styles for better aesthetics */
+        .card {
+            background-color: white;
+            border-radius: 1.5rem; /* More rounded corners */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .btn-primary {
+            background-color: #0d6efd; /* A vibrant blue, similar to logo */
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 9999px; /* Pill shape */
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 6px -1px rgba(13, 110, 253, 0.3), 0 2px 4px -1px rgba(13, 110, 253, 0.2);
+        }
+        .btn-primary:hover {
+            background-color: #0a58ca; /* Darker blue */
+            transform: translateY(-2px);
+        }
+        .btn-secondary {
+            background-color: #e0f2fe; /* Light blue */
+            color: #0d6efd; /* Vibrant blue */
+            padding: 0.75rem 2rem;
+            border-radius: 9999px;
+            font-weight: 600;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .btn-secondary:hover {
+            background-color: #bfdbfe; /* Even lighter blue */
+            transform: translateY(-2px);
+        }
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid #d1d5db; /* Gray-300 */
+            border-radius: 0.75rem; /* Rounded corners */
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #0d6efd; /* Vibrant blue for focus */
+            box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.2); /* Focus ring */
+        }
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .tab-button.active {
+            background-color: #0d6efd; /* Vibrant blue for active tab */
+            color: white;
+        }
+        .tab-button:not(.active):hover {
+            background-color: #e0f2fe; /* Light blue on hover */
+            color: #0d6efd; /* Vibrant blue on hover */
+        }
+        /* FAQ accordion styles */
+        .faq-item {
+            border-bottom: 1px solid #e2e8f0; /* Gray-200 */
+        }
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 0;
+            cursor: pointer;
+            font-weight: 600;
+            color: #1a202c; /* Gray-900 */
+        }
+        .faq-answer {
+            padding-bottom: 1.25rem;
+            color: #4a5568; /* Gray-700 */
+            display: none;
+        }
+        .faq-question svg {
+            transition: transform 0.3s ease;
+        }
+        .faq-question.open svg {
+            transform: rotate(180deg);
+        }
+        /* Nav item styling */
+        .nav-item {
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            white-space: nowrap; /* Keep items in a single line */
+        }
+        /* Updated hover effect for nav items */
+        .nav-item:hover {
+            background-color: #0d6efd; /* Primary blue */
+            color: white;
+        }
+        /* Ensure nav items stay in one row */
+        .nav-row {
+            display: flex;
+            flex-wrap: nowrap; /* Prevent wrapping */
+            overflow-x: auto; /* Allow horizontal scrolling if too many items */
+            -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+            scrollbar-width: none; /* Hide scrollbar for Firefox */
+            -ms-overflow-style: none;  /* Hide scrollbar for IE and Edge */
+        }
+        .nav-row::-webkit-scrollbar { /* Hide scrollbar for Chrome, Safari, Opera */
+            display: none;
+        }
+        /* Specific styling for contact info to prevent wrapping */
+        .contact-detail-item {
+            white-space: nowrap; /* Prevent text from wrapping */
+            margin-bottom: 0.5rem; /* Add some spacing between lines */
+        }
+        .contact-detail-item:last-child {
+            margin-bottom: 0; /* No margin for the last item */
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        .modal-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #4a5568;
+        }
+        /* Success message style */
+        .success-message {
+            background-color: #d4edda; /* Light green */
+            color: #155724; /* Dark green */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm py-4 px-6 md:px-12 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#home" class="flex items-center space-x-2" onclick="scrollToSection('home')">
+                <img id="header-logo" src="photo/logo.jpg" alt="Home Tuition Guru Logo" class="h-10" />
+                <span class="text-2xl font-bold text-blue-700 hidden sm:block">Home Tuition Guru</span>
+            </a>
+            <nav class="hidden md:flex space-x-2 nav-row">
+                <a href="#home" class="nav-item text-gray-600 font-medium" onclick="scrollToSection('home')">Home</a>
+                <a href="#how-it-works" class="nav-item text-gray-600 font-medium" onclick="scrollToSection('how-it-works')">How It Works</a>
+                <a href="#find-tutor-contact-section" class="nav-item text-gray-600 font-medium" onclick="scrollToSection('find-tutor-contact-section')">Find a Tutor</a>
+                <a href="#post-vacancy" class="nav-item text-gray-600 font-medium" onclick="scrollToSection('post-vacancy')">Post Vacancy</a>
+                <a href="#" class="nav-item text-gray-600 font-medium" onclick="openBecomeTutorForm()">Become a Tutor</a>
+                <a href="#faq" class="nav-item text-gray-600 font-medium" onclick="scrollToSection('faq')">FAQ</a>
+                <a href="#contact-us" class="nav-item text-gray-600 font-medium" onclick="scrollToSection('contact-us')">Contact Us</a>
+            </nav>
+            <!-- Mobile Menu Button - Placeholder -->
+            <button class="md:hidden text-gray-600 focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home" class="py-20 px-6 bg-gradient-to-r from-blue-600 to-black text-white text-center rounded-b-3xl shadow-lg">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight mb-6">
+                Your Path to Academic Excellence in Nepal
+            </h1>
+            <p class="text-xl md:text-2xl mb-10 opacity-90">
+                Connecting students with the best home tutors across Nepal.
+            </p>
+            <div class="space-x-4">
+                <button class="btn-primary bg-white text-blue-600 hover:bg-gray-100" onclick="scrollToSection('find-tutor-contact-section')">
+                    Find a Tutor
+                </button>
+                <button class="btn-secondary bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600" onclick="openBecomeTutorForm()">
+                    Become a Tutor
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 px-6 bg-white">
+        <div class="max-w-7xl mx-auto text-center">
+            <h2 class="text-4xl font-bold text-gray-900 mb-12">How It Works</h2>
+
+            <div class="flex justify-center mb-10">
+                <div id="tab-student" class="tab-button active" onclick="showTab('student')">For Students/Parents</div>
+                <div id="tab-teacher" class="tab-button" onclick="showTab('teacher')">For Teachers</div>
+            </div>
+
+            <!-- Student/Parent Flow -->
+            <div id="student-flow" class="flow-section grid md:grid-cols-3 gap-8 text-left">
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="bg-blue-100 text-blue-600 p-4 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">1. Post Your Vacancy</h3>
+                    <p class="text-gray-600">Describe your needs: subject, grade, location, and learning goals. Teachers will apply.</p>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="bg-blue-100 text-blue-600 p-4 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">2. Review Applications</h3>
+                    <p class="text-gray-600">Browse teacher profiles, qualifications, and reviews. Chat securely within the platform.</p>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="bg-blue-100 text-blue-600 p-4 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.003 12.003 0 002.944 12c0 4.908 3.069 9.138 7.5 10.976M12 14.976c4.431-1.838 7.5-6.068 7.5-10.976"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">3. Confirm Your Selection</h3>
+                    <p class="text-gray-600">Once a teacher is selected, you can confirm your choice and proceed to connect.</p>
+                </div>
+            </div>
+
+            <!-- Teacher Flow (Initially hidden) -->
+            <div id="teacher-flow" class="flow-section grid md:grid-cols-3 gap-8 text-left hidden">
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="bg-blue-100 text-blue-600 p-4 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">1. Create Your Profile</h3>
+                    <p class="text-gray-600">Showcase your expertise, subjects, experience, and availability to potential students.</p>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="bg-blue-100 text-blue-600 p-4 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">2. Find & Apply for Vacancies</h3>
+                    <p class="text-gray-600">Browse student vacancies matching your skills. Communicate securely with parents.</p>
+                </div>
+                <div class="card p-6 flex flex-col items-center text-center">
+                    <div class="bg-blue-100 text-blue-600 p-4 mb-4">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-3">3. Connect with Students</h3>
+                    <p class="text-gray-600">Once selected by a parent, get contact details and begin your tutoring journey!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Find a Tutor Contact Section -->
+    <section id="find-tutor-contact-section" class="bg-blue-800 text-white py-16 px-6 text-center rounded-t-3xl shadow-lg">
+        <div class="max-w-3xl mx-auto">
+            <h2 class="text-4xl font-bold mb-6">Ready to Find Your Perfect Tutor?</h2>
+            <p class="text-xl opacity-90 mb-8">
+                Contact us directly to get started. We'll help you find the perfect match!
+            </p>
+            <div class="flex flex-col md:flex-row justify-center items-center md:space-x-8 space-y-4 md:space-y-0 mb-8">
+                <div class="text-2xl font-semibold flex flex-col items-center md:items-start">
+                    <p class="mb-2 contact-detail-item">Mobile/WhatsApp: <span class="font-bold">+977 9768989841</span></p>
+                    <p class="contact-detail-item">Email: <a href="mailto:hometuitionguru.np@gmail.com" class="underline hover:text-blue-200">hometuitionguru.np@gmail.com</a></p>
+                </div>
+                <div class="text-lg opacity-90 flex flex-col items-center">
+                    <p class="mb-2">Find us on:</p>
+                    <a href="https://www.facebook.com/hometuitionguru.np" target="_blank" class="btn-primary bg-white text-blue-600 hover:bg-gray-100 inline-flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.262c-1.225 0-1.62.75-1.62 1.516V12h2.773l-.443 2.89h-2.33V22C17.36 21.128 22 16.991 22 12z"></path></svg>
+                        Facebook: hometuitionguru.np
+                    </a>
+                </div>
+            </div>
+            <p class="text-xl opacity-90 mb-6">
+                You can also directly post the tuition vacancy below.
+            </p>
+            <button class="btn-primary bg-white text-blue-600 hover:bg-gray-100" onclick="scrollToSection('post-vacancy')">
+                Post a Vacancy Now
+            </button>
+        </div>
+    </section>
+
+    <!-- Post Vacancy Section -->
+    <section id="post-vacancy" class="py-20 px-6 bg-gray-50 flex items-center justify-center min-h-screen">
+        <div class="max-w-3xl w-full card">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Post a Tuition Vacancy</h2>
+            <p class="text-gray-600 text-center mb-8">Describe your tutoring needs and let qualified teachers apply to you.</p>
+            <!-- Success message container -->
+            <div id="post-vacancy-success-message" class="success-message hidden"></div>
+            <!-- Formspree form for Post Vacancy -->
+            <form action="https://formspree.io/f/mldlejba" method="POST" onsubmit="return validateForm(event, 'post-vacancy')">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="studentName" class="block text-gray-700 text-sm font-medium mb-2">Your Name</label>
+                        <input type="text" id="studentName" name="studentName" class="input-field" placeholder="Your Name" required />
+                    </div>
+                    <div>
+                        <label for="subject" class="block text-gray-700 text-sm font-medium mb-2">Subject Needed</label>
+                        <input type="text" id="subject" name="subject" class="input-field" placeholder="e.g., Class 10 Science, A-Level Math" required />
+                    </div>
+                    <div>
+                        <label for="grade" class="block text-gray-700 text-sm font-medium mb-2">Grade/Level</label>
+                        <input type="text" id="grade" name="grade" class="input-field" placeholder="e.g., Grade 8, Bachelor's 1st Year" required />
+                    </div>
+                    <div>
+                        <label for="teachingMode" class="block text-gray-700 text-sm font-medium mb-2">Preferred Teaching Mode</label>
+                        <select id="teachingMode" name="teachingMode" class="input-field" onchange="toggleLocationField()" required>
+                            <option value="">Select Mode</option>
+                            <option value="In-person">In-person</option>
+                            <option value="Online">Online</option>
+                        </select>
+                    </div>
+                    <div id="location-field-container" class="hidden">
+                        <label for="location" class="block text-gray-700 text-sm font-medium mb-2">Location with Near Landmark</label>
+                        <input type="text" id="location" name="location" class="input-field" placeholder="e.g., Near Bhatbhateni, Lazimpat" />
+                    </div>
+                    <div>
+                        <label for="board" class="block text-gray-700 text-sm font-medium mb-2">Board (e.g., SEE, NEB, CBSE, A-Levels)</label>
+                        <input type="text" id="board" name="board" class="input-field" placeholder="e.g., NEB Class 12" />
+                    </div>
+                    <div>
+                        <label for="time" class="block text-gray-700 text-sm font-medium mb-2">Preferred Time of Teaching</label>
+                        <input type="text" id="time" name="time" class="input-field" placeholder="e.g., Evenings 5-7 PM, Weekends" />
+                    </div>
+                    <!-- Parent Contact Details -->
+                    <div>
+                        <label for="parentContactPhone" class="block text-gray-700 text-sm font-medium mb-2">Your Phone Number</label>
+                        <input type="tel" id="parentContactPhone" name="parentContactPhone" class="input-field" placeholder="+977-XXXXXXXXXX" required />
+                    </div>
+                    <!-- Re-added Your Email field as it was removed in previous turn -->
+                    <div>
+                        <label for="parentContactEmail" class="block text-gray-700 text-sm font-medium mb-2">Your Email</label>
+                        <input type="email" id="parentContactEmail" name="parentContactEmail" class="input-field" placeholder="your@example.com" required />
+                    </div>
+                </div>
+                <div class="mb-6">
+                    <label for="details" class="block text-gray-700 text-sm font-medium mb-2">Additional Details / Learning Goals</label>
+                    <textarea id="details" name="details" rows="4" class="input-field" placeholder="e.g., 'Need help with algebra and geometry for SEE preparation.'"></textarea>
+                    <p class="text-xs text-red-500 mt-1">Note: Sharing contact information (phone numbers, emails) in this field is prohibited for your security.</p>
+                </div>
+                <div class="mb-6">
+                    <label for="budget" class="block text-gray-700 text-sm font-medium mb-2">Budget (per hour/month, optional)</label>
+                    <input type="text" id="budget" name="budget" class="input-field" placeholder="e.g., NPR 500/hour or NPR 8000/month" />
+                </div>
+                <button type="submit" class="btn-primary w-full">Post Vacancy</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-20 px-6 bg-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-bold text-gray-900 mb-12">Frequently Asked Questions</h2>
+
+            <div class="space-y-4 text-left">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3 class="text-lg">What is Home Tuition Guru?</h3>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Home Tuition Guru is a platform connecting students and parents with qualified home tutors across Nepal. We aim to make it easy to find the perfect tutor for your academic needs.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3 class="text-lg">How do I find a tutor?</h3>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>As a student or parent, you can post a tuition vacancy detailing your requirements (subject, grade, location, etc.). Qualified teachers will then apply to your vacancy, and you can review their profiles and select the best fit.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3 class="text-lg">How do I become a tutor?</h3>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Teachers can create a detailed profile showcasing their expertise, subjects, experience, and availability. You can then browse and apply to student vacancies that match your skills. Once selected, you can connect with the student/parent.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3 class="text-lg">Is there a fee for using the platform?</h3>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our platform aims to provide seamless connections. Specific details regarding any service fees or subscription models will be clearly communicated during the matching process.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        <h3 class="text-lg">How does the matching process work?</h3>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Once a student/parent posts a vacancy, interested teachers apply. The student/parent reviews teacher profiles and makes a selection. After confirmation, both parties receive each other's contact details to arrange tuition.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div >
+
+    <!-- Contact Us Section -->
+    <section id="contact-us" class="py-20 px-6 bg-gray-50 flex items-center justify-center min-h-screen">
+        <div class="max-w-md w-full card">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Contact Us</h2>
+            <p class="text-gray-600 text-center mb-8">Have questions or need assistance? Send us a message!</p>
+            <!-- Success message container for contact form -->
+            <div id="contact-us-success-message" class="success-message hidden"></div>
+            <form action="https://formspree.io/f/mzzvbedl" method="POST" onsubmit="return validateForm(event, 'contact-us')">
+                <div class="mb-6">
+                    <label for="contact-name" class="block text-gray-700 text-sm font-medium mb-2">Your Name</label>
+                    <input
+                        type="text"
+                        id="contact-name"
+                        name="name"
+                        class="input-field"
+                        placeholder="John Doe"
+                        required
+                    />
+                </div>
+                <div class="mb-6">
+                    <label for="contact-email" class="block text-gray-700 text-sm font-medium mb-2">Your Email</label>
+                    <input
+                        type="email"
+                        id="contact-email"
+                        name="email"
+                        class="input-field"
+                        placeholder="your@example.com"
+                        required
+                    />
+                </div>
+                <div class="mb-6">
+                    <label for="contact-message" class="block text-gray-700 text-sm font-medium mb-2">Message</label>
+                    <textarea
+                        id="contact-message"
+                        name="message"
+                        rows="5"
+                        class="input-field"
+                        placeholder="Type your message here..."
+                        required
+                    ></textarea>
+                </div>
+                <button type="submit" class="btn-primary w-full">Send Message</button>
+            </form>
+            <p class="text-center text-sm text-gray-600 mt-4">
+                We will get back to you as soon as possible.
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer-section" class="bg-gray-900 text-gray-300 py-12 px-6">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <img id="footer-logo" src="photo/logo.jpg" alt="Home Tuition Guru Logo" class="h-12 mb-4" />
+                <h3 class="text-white text-lg font-semibold mb-2">Home Tuition Guru Pvt. Ltd.</h3>
+                <p class="text-gray-400 mb-2">
+                    Registration No. 369150<br>
+                    PAN: 622384658
+                </p>
+                <p class="text-gray-400">&copy; 2025 All rights reserved.</p>
+            </div>
+            <div>
+                <h3 class="text-white text-lg font-semibold mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#home" onclick="scrollToSection('home')" class="hover:text-white">Home</a></li>
+                    <li><a href="#" onclick="openBecomeTutorForm()" class="hover:text-white">Become a Tutor</a></li>
+                    <li><a href="#find-tutor-contact-section" onclick="scrollToSection('find-tutor-contact-section')" class="hover:text-white">Find a Tutor</a></li>
+                    <li><a href="#" onclick="openModal('privacy-policy-modal')" class="hover:text-white">Privacy Policy</a></li>
+                    <li><a href="#" onclick="openModal('terms-of-service-modal')" class="hover:text-white">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="text-white text-lg font-semibold mb-4">Contact Us</h3>
+                <p class="text-gray-400 mb-2">Facebook: <a href="https://www.facebook.com/hometuitionguru.np" target="_blank" class="underline hover:text-white">hometuitionguru.np</a></p>
+                <p class="text-gray-400 mb-2">Email: hometuitionguru.np@gmail.com</p>
+                <p class="text-gray-400">Phone/WhatsApp: +977-9768989841</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Privacy Policy Modal -->
+    <div id="privacy-policy-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button" onclick="closeModal('privacy-policy-modal')">&times;</button>
+            <h2 class="text-2xl font-bold mb-4">Privacy Policy</h2>
+            <p class="text-gray-700 mb-4">
+                Your privacy is important to us. This policy outlines how Home Tuition Guru Pvt. Ltd. collects, uses, and protects your personal information.
+                We collect information you provide directly to us, such as your name, contact details, and tutoring preferences when you register or post a vacancy.
+                This information is used solely to facilitate connections between students/parents and tutors, improve our services, and communicate with you.
+                We do not share your personal information with third parties without your explicit consent, except as required by law.
+                We implement reasonable security measures to protect your data, but no method of transmission over the Internet or electronic storage is 100% secure.
+                By using our platform, you consent to the collection and use of your information as described in this policy.
+                This policy may be updated periodically, and we encourage you to review it regularly.
+            </p>
+            <button class="btn-primary" onclick="closeModal('privacy-policy-modal')">Close</button>
+        </div>
+    </div>
+
+    <!-- Terms of Service Modal -->
+    <div id="terms-of-service-modal" class="modal-overlay hidden">
+        <div class="modal-content">
+            <button class="modal-close-button" onclick="closeModal('terms-of-service-modal')">&times;</button>
+            <h2 class="text-2xl font-bold mb-4">Terms of Service</h2>
+            <p class="text-gray-700 mb-4">
+                Welcome to Home Tuition Guru Pvt. Ltd.! These Terms of Service govern your use of our platform.
+                By accessing or using our services, you agree to be bound by these terms.
+                Our platform connects students/parents with tutors. We facilitate the matching process but are not responsible for the direct interactions, quality of tuition, or payment arrangements between users.
+                Users must provide accurate and truthful information. Misrepresentation may lead to account suspension.
+                You agree not to use our platform for any unlawful or prohibited activities.
+                All content on this platform, including text, graphics, logos, and software, is the property of Home Tuition Guru Pvt. Ltd. or its content suppliers and protected by copyright laws.
+                We reserve the right to modify or terminate our services at any time without prior notice.
+                These terms constitute the entire agreement between you and Home Tuition Guru Pvt. Ltd. regarding your use of the service.
+                Please read these terms carefully before using our services.
+            </p>
+            <button class="btn-primary" onclick="closeModal('terms-of-service-modal')">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for tab switching in "How It Works" section
+        function showTab(tabName) {
+            const studentFlow = document.getElementById('student-flow');
+            const teacherFlow = document.getElementById('teacher-flow');
+            const tabStudent = document.getElementById('tab-student');
+            const tabTeacher = document.getElementById('tab-teacher');
+
+            if (tabName === 'student') {
+                studentFlow.classList.remove('hidden');
+                teacherFlow.classList.add('hidden');
+                tabStudent.classList.add('active');
+                tabTeacher.classList.remove('active');
+            } else {
+                teacherFlow.classList.remove('hidden');
+                studentFlow.classList.add('hidden');
+                tabTeacher.classList.add('active');
+                tabStudent.classList.remove('active');
+            }
+        }
+
+        // JavaScript for smooth scrolling to sections
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Function to open "Become a Tutor" Google Form
+        function openBecomeTutorForm() {
+            window.open('https://forms.gle/AQpeKyTw39HsLmWs8', '_blank');
+        }
+
+        // Function to toggle visibility of location field based on teaching mode
+        function toggleLocationField() {
+            const teachingModeSelect = document.getElementById('teachingMode');
+            const locationFieldContainer = document.getElementById('location-field-container');
+
+            if (teachingModeSelect && locationFieldContainer) {
+                if (teachingModeSelect.value === 'In-person') {
+                    locationFieldContainer.classList.remove('hidden');
+                    const locationInput = locationFieldContainer.querySelector('input');
+                    if (locationInput) {
+                        locationInput.setAttribute('required', 'required');
+                    }
+                } else {
+                    locationFieldContainer.classList.add('hidden');
+                    const locationInput = locationFieldContainer.querySelector('input');
+                    if (locationInput) {
+                        locationInput.removeAttribute('required');
+                    }
+                }
+            }
+        }
+
+        // JavaScript for FAQ accordion
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            if (answer.style.display === 'block') {
+                answer.style.display = 'none';
+                element.classList.remove('open');
+            } else {
+                answer.style.display = 'block';
+                element.classList.add('open');
+            }
+        }
+
+        // Functions for Modals
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove('hidden');
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add('hidden');
+        }
+
+        // Form Validation and Submission
+        async function validateForm(event, formType) {
+            event.preventDefault(); // Prevent default form submission
+
+            const form = event.target;
+            const requiredFields = form.querySelectorAll('[required]');
+            let allFieldsFilled = true;
+
+            // Clear previous success message if any
+            const successMessageElement = document.getElementById(`${formType}-success-message`);
+            if (successMessageElement) {
+                successMessageElement.classList.add('hidden');
+                successMessageElement.textContent = '';
+            }
+
+            // Check if all required fields are filled
+            for (const field of requiredFields) {
+                if (!field.value.trim()) {
+                    allFieldsFilled = false;
+                    // Optional: Add visual feedback for empty fields
+                    field.style.borderColor = 'red';
+                    field.placeholder = 'This field is required!';
+                } else {
+                    field.style.borderColor = '#d1d5db'; // Reset border color
+                }
+            }
+
+            if (!allFieldsFilled) {
+                alert('Please fill in all required fields.');
+                return false;
+            }
+
+            // Specific validation for 'post-vacancy' form
+            if (formType === 'post-vacancy') {
+                const detailsField = document.getElementById('details');
+                // Regex to detect a 10-digit number (common for phone numbers)
+                const phoneNumberRegex = /\b\d{10}\b/; 
+
+                if (detailsField && phoneNumberRegex.test(detailsField.value)) {
+                    alert('Note: Sharing contact information (phone numbers, emails) in the "Additional Details" field is prohibited for your security. Please remove any phone numbers.');
+                    detailsField.style.borderColor = 'red';
+                    return false;
+                } else if (detailsField) {
+                    detailsField.style.borderColor = '#d1d5db'; // Reset border color
+                }
+            }
+
+            // If all validations pass, submit the form via fetch
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                if (response.ok) {
+                    if (successMessageElement) {
+                        successMessageElement.textContent = 'Form submitted successfully!';
+                        successMessageElement.classList.remove('hidden');
+                    }
+                    // Clear all form fields
+                    form.reset();
+                    // Also hide location field if teaching mode changes back to online
+                    if (formType === 'post-vacancy') {
+                        toggleLocationField();
+                    }
+                    // Optional: Hide success message after a few seconds
+                    setTimeout(() => {
+                        if (successMessageElement) {
+                            successMessageElement.classList.add('hidden');
+                        }
+                    }, 5000); // Hide after 5 seconds
+                } else {
+                    const data = await response.json();
+                    if (data.errors) {
+                        alert(`Form submission failed: ${data.errors.map(error => error.message).join(', ')}`);
+                    } else {
+                        alert('Form submission failed. Please try again.');
+                    }
+                }
+            } catch (error) {
+                console.error('Error submitting form:', error);
+                alert('An error occurred during form submission. Please check your internet connection and try again.');
+            }
+            return false; // Prevent default browser submission
+        }
+
+        // Set initial scroll position if hash is present
+        document.addEventListener('DOMContentLoaded', () => {
+            const initialHash = window.location.hash.substring(1); // Remove '#'
+            if (initialHash) {
+                scrollToSection(initialHash);
+            }
+            // Initialize the location field visibility for "Post Vacancy" form
+            toggleLocationField();
+        });
+    </script>
+</body>
+</html>
