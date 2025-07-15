@@ -194,6 +194,51 @@
             text-align: center;
             font-weight: 600;
         }
+
+        /* Mobile menu specific styles */
+        .mobile-menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9); /* Darker overlay */
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: translateY(-100%); /* Start off-screen */
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu-overlay.open {
+            transform: translateY(0); /* Slide in */
+        }
+        .mobile-menu-overlay .close-button {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+        }
+        .mobile-menu-overlay nav a {
+            color: white;
+            font-size: 1.5rem;
+            padding: 1rem 0;
+            width: 80%;
+            text-align: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: background-color 0.2s ease;
+        }
+        .mobile-menu-overlay nav a:last-child {
+            border-bottom: none;
+        }
+        .mobile-menu-overlay nav a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -214,12 +259,26 @@
                 <a href="#faq" class="nav-item text-gray-600 font-medium" onclick="scrollToSection('faq')">FAQ</a>
                 <a href="#contact-us" class="nav-item text-gray-600 font-medium" onclick="scrollToSection('contact-us')">Contact Us</a>
             </nav>
-            <!-- Mobile Menu Button - Placeholder -->
-            <button class="md:hidden text-gray-600 focus:outline-none">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            <!-- Mobile Menu Button -->
+            <button class="md:hidden text-gray-600 focus:outline-none" onclick="toggleMobileMenu()">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
         </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="mobile-menu-overlay hidden">
+        <button class="close-button" onclick="toggleMobileMenu()">&times;</button>
+        <nav class="flex flex-col items-center space-y-4 pt-16">
+            <a href="#home" class="nav-item text-white font-medium" onclick="toggleMobileMenu(); scrollToSection('home');">Home</a>
+            <a href="#how-it-works" class="nav-item text-white font-medium" onclick="toggleMobileMenu(); scrollToSection('how-it-works');">How It Works</a>
+            <a href="#find-tutor-contact-section" class="nav-item text-white font-medium" onclick="toggleMobileMenu(); scrollToSection('find-tutor-contact-section');">Find a Tutor</a>
+            <a href="#post-vacancy" class="nav-item text-white font-medium" onclick="toggleMobileMenu(); scrollToSection('post-vacancy');">Post Vacancy</a>
+            <a href="#" class="nav-item text-white font-medium" onclick="toggleMobileMenu(); openBecomeTutorForm();">Become a Tutor</a>
+            <a href="#faq" class="nav-item text-white font-medium" onclick="toggleMobileMenu(); scrollToSection('faq');">FAQ</a>
+            <a href="#contact-us" class="nav-item text-white font-medium" onclick="toggleMobileMenu(); scrollToSection('contact-us');">Contact Us</a>
+        </nav>
+    </div>
 
     <!-- Home Section -->
     <section id="home" class="py-20 px-6 bg-gradient-to-r from-blue-600 to-black text-white text-center rounded-b-3xl shadow-lg">
@@ -652,12 +711,20 @@
             document.getElementById(modalId).classList.add('hidden');
         }
 
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('open'); // For slide-in animation
+        }
+
         // Form Validation and Submission
         async function validateForm(event, formType) {
             event.preventDefault(); // Prevent default form submission
 
             const form = event.target;
-            const requiredFields = form.querySelectorAll('[required]');
+            // Select all input, select, and textarea elements that are required
+            const requiredFields = form.querySelectorAll('input[required], select[required], textarea[required]');
             let allFieldsFilled = true;
 
             // Clear previous success message if any
@@ -669,19 +736,29 @@
 
             // Check if all required fields are filled
             for (const field of requiredFields) {
-                // For select elements, ensure a non-empty value is selected
-                if (field.tagName === 'SELECT' && field.value === '') {
+                // Special handling for the location field if it's hidden
+                if (field.id === 'location' && field.closest('.hidden')) {
+                    field.removeAttribute('required'); // Temporarily remove required if hidden
+                    field.style.borderColor = '#d1d5db'; // Reset border color
+                    continue; // Skip validation for this field if hidden
+                }
+
+                if (!field.value.trim()) {
                     allFieldsFilled = false;
-                    field.style.borderColor = 'red';
-                } else if (!field.value.trim()) {
-                    allFieldsFilled = false;
-                    // Optional: Add visual feedback for empty fields
                     field.style.borderColor = 'red';
                     field.placeholder = 'This field is required!';
                 } else {
                     field.style.borderColor = '#d1d5db'; // Reset border color
                 }
             }
+
+            // Re-add required attribute to location if it was removed and should be required
+            const locationInput = document.getElementById('location');
+            const teachingModeSelect = document.getElementById('teachingMode');
+            if (locationInput && teachingModeSelect && teachingModeSelect.value === 'In-person') {
+                locationInput.setAttribute('required', 'required');
+            }
+
 
             if (!allFieldsFilled) {
                 alert('Please fill in all required fields.');
@@ -722,7 +799,7 @@
                     form.reset();
                     // Also hide location field if teaching mode changes back to online
                     if (formType === 'post-vacancy') {
-                        toggleLocationField();
+                        toggleLocationField(); // This will re-evaluate and hide if mode is not In-person
                     }
                     // Optional: Hide success message after a few seconds
                     setTimeout(() => {
