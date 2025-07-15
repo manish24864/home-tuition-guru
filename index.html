@@ -368,11 +368,11 @@
                     </div>
                     <div>
                         <label for="board" class="block text-gray-700 text-sm font-medium mb-2">Board (e.g., SEE, NEB, CBSE, A-Levels)</label>
-                        <input type="text" id="board" name="board" class="input-field" placeholder="e.g., NEB Class 12" />
+                        <input type="text" id="board" name="board" class="input-field" placeholder="e.g., NEB Class 12" required />
                     </div>
                     <div>
                         <label for="time" class="block text-gray-700 text-sm font-medium mb-2">Preferred Time of Teaching</label>
-                        <input type="text" id="time" name="time" class="input-field" placeholder="e.g., Evenings 5-7 PM, Weekends" />
+                        <input type="text" id="time" name="time" class="input-field" placeholder="e.g., Evenings 5-7 PM, Weekends" required />
                     </div>
                     <!-- Parent Contact Details -->
                     <div>
@@ -381,18 +381,18 @@
                     </div>
                     <!-- Re-added Your Email field as it was removed in previous turn -->
                     <div>
-                        <label for="parentContactEmail" class="block text-gray-700 text-sm font-medium mb-2">Your Email</label>
-                        <input type="email" id="parentContactEmail" name="parentContactEmail" class="input-field" placeholder="your@example.com" required />
+                        <label for="parentContactEmail" class="block text-gray-700 text-sm font-medium mb-2">Your Email (Optional)</label>
+                        <input type="email" id="parentContactEmail" name="parentContactEmail" class="input-field" placeholder="your@example.com" />
                     </div>
                 </div>
                 <div class="mb-6">
                     <label for="details" class="block text-gray-700 text-sm font-medium mb-2">Additional Details / Learning Goals</label>
-                    <textarea id="details" name="details" rows="4" class="input-field" placeholder="e.g., 'Need help with algebra and geometry for SEE preparation.'"></textarea>
+                    <textarea id="details" name="details" rows="4" class="input-field" placeholder="e.g., 'Need help with algebra and geometry for SEE preparation.'" required></textarea>
                     <p class="text-xs text-red-500 mt-1">Note: Sharing contact information (phone numbers, emails) in this field is prohibited for your security.</p>
                 </div>
                 <div class="mb-6">
-                    <label for="budget" class="block text-gray-700 text-sm font-medium mb-2">Budget (per hour/month, optional)</label>
-                    <input type="text" id="budget" name="budget" class="input-field" placeholder="e.g., NPR 500/hour or NPR 8000/month" />
+                    <label for="budget" class="block text-gray-700 text-sm font-medium mb-2">Budget (per hour/month)</label>
+                    <input type="text" id="budget" name="budget" class="input-field" placeholder="e.g., NPR 500/hour or NPR 8000/month" required />
                 </div>
                 <button type="submit" class="btn-primary w-full">Post Vacancy</button>
             </form>
@@ -478,14 +478,13 @@
                     />
                 </div>
                 <div class="mb-6">
-                    <label for="contact-email" class="block text-gray-700 text-sm font-medium mb-2">Your Email</label>
+                    <label for="contact-email" class="block text-gray-700 text-sm font-medium mb-2">Your Email (Optional)</label>
                     <input
                         type="email"
                         id="contact-email"
                         name="email"
                         class="input-field"
                         placeholder="your@example.com"
-                        required
                     />
                 </div>
                 <div class="mb-6">
@@ -670,7 +669,11 @@
 
             // Check if all required fields are filled
             for (const field of requiredFields) {
-                if (!field.value.trim()) {
+                // For select elements, ensure a non-empty value is selected
+                if (field.tagName === 'SELECT' && field.value === '') {
+                    allFieldsFilled = false;
+                    field.style.borderColor = 'red';
+                } else if (!field.value.trim()) {
                     allFieldsFilled = false;
                     // Optional: Add visual feedback for empty fields
                     field.style.borderColor = 'red';
