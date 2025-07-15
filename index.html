@@ -196,7 +196,7 @@
             left: 0;
             width: 100%;
             max-height: 80vh; /* Example: 80% of viewport height */
-            background-color: rgba(0, 0, 0, 0.9); /* Darker overlay */
+            background-color: white; /* Changed to white background */
             z-index: 999;
             display: flex;
             flex-direction: column;
@@ -205,21 +205,22 @@
             transform: translateY(-100%); /* Start off-screen */
             transition: transform 0.3s ease-in-out;
             overflow-y: auto; /* Enable scrolling if menu content exceeds max-height */
-            padding-top: 5rem; /* Add padding from the top for better spacing */
+            padding-top: 2rem; /* Adjusted padding from the top for better spacing */
             border-bottom-left-radius: 1.5rem; /* Rounded bottom corners */
             border-bottom-right-radius: 1.5rem; /* Rounded bottom corners */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Added shadow */
         }
         .mobile-menu-overlay.open {
             transform: translateY(0); /* Slide in */
         }
         .mobile-menu-overlay .close-button {
             position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
+            top: 1rem; /* Adjusted top position */
+            right: 1rem;
             background: none;
             border: none;
             font-size: 2rem;
-            color: white;
+            color: #4a5568; /* Changed to dark gray for contrast on white background */
             cursor: pointer;
         }
         .mobile-menu-overlay nav {
@@ -230,19 +231,19 @@
             padding-bottom: 2rem; /* Padding at the bottom of the menu */
         }
         .mobile-menu-overlay nav a {
-            color: white;
-            font-size: 1.5rem;
-            padding: 1rem 0;
+            color: #1a202c; /* Changed to dark gray for contrast on white background */
+            font-size: 1.125rem; /* Smaller font size (text-lg) */
+            padding: 0.75rem 0; /* Adjusted padding */
             width: 80%; /* Menu items take 80% width of the overlay */
             text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid #e2e8f0; /* Lighter border for white background */
             transition: background-color 0.2s ease;
         }
         .mobile-menu-overlay nav a:last-child {
             border-bottom: none;
         }
         .mobile-menu-overlay nav a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+            background-color: #f0f4f8; /* Light gray on hover */
         }
     </style>
 </head>
@@ -275,13 +276,13 @@
     <div id="mobile-menu" class="mobile-menu-overlay hidden">
         <button class="close-button" onclick="toggleMobileMenu()">&times;</button>
         <nav class="flex flex-col items-center space-y-4 pt-16">
-            <a href="#home" class="nav-item text-white font-medium" onclick="toggleMobileMenu(); scrollToSection('home');">Home</a>
-            <a href="#how-it-works" class="nav-item text-white font-medium" onclick="toggleMobileMenu(); scrollToSection('how-it-works');">How It Works</a>
-            <a href="#find-tutor-contact-section" class="nav-item text-white font-medium" onclick="toggleMobileMenu(); scrollToSection('find-tutor-contact-section');">Find a Tutor</a>
-            <a href="#post-vacancy" class="nav-item text-white font-medium" onclick="toggleMobileMenu(); scrollToSection('post-vacancy');">Post Vacancy</a>
-            <a href="#" class="nav-item text-white font-medium" onclick="toggleMobileMenu(); openBecomeTutorForm();">Become a Tutor</a>
-            <a href="#faq" class="nav-item text-white font-medium" onclick="toggleMobileMenu(); scrollToSection('faq');">FAQ</a>
-            <a href="#contact-us" class="nav-item text-white font-medium" onclick="toggleMobileMenu(); scrollToSection('contact-us');">Contact Us</a>
+            <a href="#home" class="nav-item text-gray-800 font-medium" onclick="toggleMobileMenu(); scrollToSection('home');">Home</a>
+            <a href="#how-it-works" class="nav-item text-gray-800 font-medium" onclick="toggleMobileMenu(); scrollToSection('how-it-works');">How It Works</a>
+            <a href="#find-tutor-contact-section" class="nav-item text-gray-800 font-medium" onclick="toggleMobileMenu(); scrollToSection('find-tutor-contact-section');">Find a Tutor</a>
+            <a href="#post-vacancy" class="nav-item text-gray-800 font-medium" onclick="toggleMobileMenu(); scrollToSection('post-vacancy');">Post Vacancy</a>
+            <a href="#" class="nav-item text-gray-800 font-medium" onclick="toggleMobileMenu(); openBecomeTutorForm();">Become a Tutor</a>
+            <a href="#faq" class="nav-item text-gray-800 font-medium" onclick="toggleMobileMenu(); scrollToSection('faq');">FAQ</a>
+            <a href="#contact-us" class="nav-item text-gray-800 font-medium" onclick="toggleMobileMenu(); scrollToSection('contact-us');">Contact Us</a>
         </nav>
     </div>
 
@@ -294,7 +295,8 @@
             <p class="text-xl md:text-2xl mb-10 opacity-90">
                 Connecting students with the best home tutors across Nepal.
             </p>
-            <div class="space-x-4">
+            <!-- Buttons adjusted for mobile stacking -->
+            <div class="flex flex-col space-y-4 md:flex-row md:space-x-4 md:space-y-0">
                 <button class="btn-primary bg-white text-blue-600 hover:bg-gray-100" onclick="scrollToSection('find-tutor-contact-section')">
                     Find a Tutor
                 </button>
