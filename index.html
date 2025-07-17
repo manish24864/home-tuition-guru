@@ -245,6 +245,25 @@
         .mobile-menu-overlay nav a:hover {
             background-color: #f0f4f8; /* Light gray on hover */
         }
+
+        /* Custom pulse animation for WhatsApp button */
+        @keyframes pulse-whatsapp {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.7); /* Green-500 shadow */
+            }
+            70% {
+                transform: scale(1.1); /* Slightly larger pulse */
+                box-shadow: 0 0 0 15px rgba(34, 197, 94, 0); /* Wider shadow */
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 0 0 rgba(34, 197, 94, 0);
+            }
+        }
+        .whatsapp-button-pulse {
+            animation: pulse-whatsapp 2s infinite;
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -263,6 +282,7 @@
                 <a href="#post-vacancy" class="nav-item text-gray-600 font-medium" onclick="scrollToSection('post-vacancy')">Post Vacancy</a>
                 <a href="#" class="nav-item text-gray-600 font-medium" onclick="openBecomeTutorForm()">Become a Tutor</a>
                 <a href="#faq" class="nav-item text-gray-600 font-medium" onclick="scrollToSection('faq')">FAQ</a>
+                <a href="#feedback-section" class="nav-item text-gray-600 font-medium" onclick="scrollToSection('feedback-section')">Feedback</a> <!-- New Feedback Link -->
                 <a href="#contact-us" class="nav-item text-gray-600 font-medium" onclick="scrollToSection('contact-us')">Contact Us</a>
             </nav>
             <!-- Mobile Menu Button -->
@@ -282,6 +302,7 @@
             <a href="#post-vacancy" class="nav-item text-gray-800 font-medium" onclick="toggleMobileMenu(); scrollToSection('post-vacancy');">Post Vacancy</a>
             <a href="#" class="nav-item text-gray-800 font-medium" onclick="toggleMobileMenu(); openBecomeTutorForm();">Become a Tutor</a>
             <a href="#faq" class="nav-item text-gray-800 font-medium" onclick="toggleMobileMenu(); scrollToSection('faq');">FAQ</a>
+            <a href="#feedback-section" class="nav-item text-gray-800 font-medium" onclick="toggleMobileMenu(); scrollToSection('feedback-section');">Feedback</a> <!-- New Feedback Link -->
             <a href="#contact-us" class="nav-item text-gray-800 font-medium" onclick="toggleMobileMenu(); scrollToSection('contact-us');">Contact Us</a>
         </nav>
     </div>
@@ -465,6 +486,51 @@
         </div>
     </section>
 
+    <!-- Feedback Section -->
+    <section id="feedback-section" class="py-20 px-6 bg-gray-50 flex items-center justify-center min-h-screen">
+        <div class="max-w-md w-full card">
+            <h2 class="text-3xl font-bold text-gray-900 mb-8 text-center">Share Your Feedback</h2>
+            <p class="text-gray-600 text-center mb-8">We'd love to hear your thoughts and suggestions!</p>
+            <!-- Success message container for feedback form -->
+            <div id="feedback-success-message" class="success-message hidden"></div>
+            <form action="https://formspree.io/f/xyzpyqzy" method="POST" onsubmit="return validateForm(event, 'feedback')">
+                <div class="mb-6">
+                    <label for="feedback-name" class="block text-gray-700 text-sm font-medium mb-2">Your Name</label>
+                    <input
+                        type="text"
+                        id="feedback-name"
+                        name="name"
+                        class="input-field"
+                        placeholder="John Doe"
+                        required
+                    />
+                </div>
+                <div class="mb-6">
+                    <label for="feedback-email" class="block text-gray-700 text-sm font-medium mb-2">Your Email (Optional)</label>
+                    <input
+                        type="email"
+                        id="feedback-email"
+                        name="email"
+                        class="input-field"
+                        placeholder="your@example.com"
+                    />
+                </div>
+                <div class="mb-6">
+                    <label for="feedback-message" class="block text-gray-700 text-sm font-medium mb-2">Your Feedback</label>
+                    <textarea
+                        id="feedback-message"
+                        name="message"
+                        rows="5"
+                        class="input-field"
+                        placeholder="Type your feedback here..."
+                        required
+                    ></textarea>
+                </div>
+                <button type="submit" class="btn-primary w-full">Submit Feedback</button>
+            </form>
+        </div>
+    </section>
+
     <!-- FAQ Section -->
     <section id="faq" class="py-20 px-6 bg-white">
         <div class="max-w-4xl mx-auto text-center">
@@ -641,6 +707,12 @@
         </div>
     </div>
 
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/+9779768989841" class="fixed bottom-4 right-4 bg-green-500 text-white p-4 rounded-full shadow-lg z-50 flex items-center justify-center transition-transform hover:scale-110 whatsapp-button-pulse" target="_blank" aria-label="Chat on WhatsApp">
+        <img src="photo/whatsapp1.png" alt="WhatsApp Logo" class="w-12 h-12">
+    </a>
+
+
     <script>
         // JavaScript for tab switching in "How It Works" section
         function showTab(tabName) {
@@ -725,7 +797,14 @@
             mobileMenu.classList.toggle('open'); // For slide-in animation
         }
 
-        // Form Validation and Submission
+        /**
+         * Validates form inputs before submission.
+         * This function performs client-side validation for required fields and specific content.
+         * For robust security, server-side validation is also crucial.
+         * @param {Event} event - The form submission event.
+         * @param {string} formType - The type of form ('post-vacancy', 'contact-us', or 'feedback').
+         * @returns {boolean} - True if validation passes, false otherwise.
+         */
         async function validateForm(event, formType) {
             event.preventDefault(); // Prevent default form submission
 
@@ -733,6 +812,7 @@
             // Select all input, select, and textarea elements that are required
             const requiredFields = form.querySelectorAll('input[required], select[required], textarea[required]');
             let allFieldsFilled = true;
+            let missingFields = []; // To store names of missing fields for a more informative alert
 
             // Clear previous success message if any
             const successMessageElement = document.getElementById(`${formType}-success-message`);
@@ -741,80 +821,97 @@
                 successMessageElement.textContent = '';
             }
 
-            // Check if all required fields are filled
+            // Iterate through all required fields to check if they are filled
             for (const field of requiredFields) {
-                // Special handling for the location field if it's hidden
+                // Special handling for the location field: it's only required if "In-person" mode is selected.
+                // If it's hidden (meaning "Online" is selected), we temporarily remove its 'required' attribute
+                // and skip validation for it.
                 if (field.id === 'location' && field.closest('.hidden')) {
                     field.removeAttribute('required'); // Temporarily remove required if hidden
                     field.style.borderColor = '#d1d5db'; // Reset border color
                     continue; // Skip validation for this field if hidden
                 }
 
+                // Check if the field's value is empty after trimming whitespace
                 if (!field.value.trim()) {
                     allFieldsFilled = false;
-                    field.style.borderColor = 'red';
-                    field.placeholder = 'This field is required!';
+                    field.style.borderColor = 'red'; // Highlight the empty field with a red border
+                    field.placeholder = 'This field is required!'; // Update placeholder for immediate feedback
+                    
+                    // Get the corresponding label text for the missing field
+                    const label = form.querySelector(`label[for="${field.id}"]`);
+                    if (label) {
+                        // Clean up label text (e.g., remove "(Optional)")
+                        missingFields.push(label.textContent.replace('(Optional)', '').trim());
+                    } else {
+                        // Fallback to field name or ID if label is not found
+                        missingFields.push(field.name || field.id);
+                    }
                 } else {
-                    field.style.borderColor = '#d1d5db'; // Reset border color
+                    field.style.borderColor = '#d1d5db'; // Reset border color for filled fields
                 }
             }
 
-            // Re-add required attribute to location if it was removed and should be required
+            // Re-add required attribute to location if it was removed and should be required (for subsequent checks)
             const locationInput = document.getElementById('location');
             const teachingModeSelect = document.getElementById('teachingMode');
             if (locationInput && teachingModeSelect && teachingModeSelect.value === 'In-person') {
                 locationInput.setAttribute('required', 'required');
             }
 
-
+            // If any required fields are missing, show an alert with the list of missing fields
             if (!allFieldsFilled) {
-                alert('Please fill in all required fields.');
-                return false;
+                alert(`Please fill in all required fields: ${missingFields.join(', ')}`);
+                return false; // Prevent form submission
             }
 
-            // Specific validation for 'post-vacancy' form
+            // Specific client-side validation for the 'post-vacancy' form
             if (formType === 'post-vacancy') {
                 const detailsField = document.getElementById('details');
-                // Regex to detect a 10-digit number (common for phone numbers)
+                // Regex to detect a 10-digit number (common for phone numbers) in the 'details' field.
+                // This is a security measure to prevent users from accidentally or maliciously
+                // sharing contact info in a public description field.
                 const phoneNumberRegex = /\b\d{10}\b/; 
 
                 if (detailsField && phoneNumberRegex.test(detailsField.value)) {
                     alert('Note: Sharing contact information (phone numbers, emails) in the "Additional Details" field is prohibited for your security. Please remove any phone numbers.');
-                    detailsField.style.borderColor = 'red';
-                    return false;
+                    detailsField.style.borderColor = 'red'; // Highlight the field
+                    return false; // Prevent form submission
                 } else if (detailsField) {
                     detailsField.style.borderColor = '#d1d5db'; // Reset border color
                 }
             }
 
-            // If all validations pass, submit the form via fetch
+            // If all client-side validations pass, submit the form via fetch API (to Formspree)
             try {
                 const response = await fetch(form.action, {
                     method: form.method,
                     body: new FormData(form),
                     headers: {
-                        'Accept': 'application/json'
+                        'Accept': 'application/json' // Expect JSON response from Formspree
                     }
                 });
 
+                // Check if the form submission was successful
                 if (response.ok) {
                     if (successMessageElement) {
                         successMessageElement.textContent = 'Form submitted successfully!';
                         successMessageElement.classList.remove('hidden');
                     }
-                    // Clear all form fields
+                    // Clear all form fields after successful submission
                     form.reset();
-                    // Also hide location field if teaching mode changes back to online
+                    // Re-evaluate and hide location field if teaching mode changes back to online after reset
                     if (formType === 'post-vacancy') {
-                        toggleLocationField(); // This will re-evaluate and hide if mode is not In-person
+                        toggleLocationField(); 
                     }
-                    // Optional: Hide success message after a few seconds
+                    // Optional: Hide the success message after a few seconds
                     setTimeout(() => {
                         if (successMessageElement) {
                             successMessageElement.classList.add('hidden');
                         }
                     }, 5000); // Hide after 5 seconds
                 } else {
+                    // Handle errors from Formspree (e.g., rate limiting, invalid form)
                     const data = await response.json();
                     if (data.errors) {
                         alert(`Form submission failed: ${data.errors.map(error => error.message).join(', ')}`);
@@ -823,19 +920,20 @@
                     }
                 }
             } catch (error) {
+                // Catch network errors or other unexpected issues during fetch
                 console.error('Error submitting form:', error);
                 alert('An error occurred during form submission. Please check your internet connection and try again.');
             }
-            return false; // Prevent default browser submission
+            return false; // Always return false to prevent default browser form submission after fetch
         }
 
-        // Set initial scroll position if hash is present
+        // Set initial scroll position if hash is present when the page loads
         document.addEventListener('DOMContentLoaded', () => {
-            const initialHash = window.location.hash.substring(1); // Remove '#'
+            const initialHash = window.location.hash.substring(1); // Remove '#' from the hash
             if (initialHash) {
                 scrollToSection(initialHash);
             }
-            // Initialize the location field visibility for "Post Vacancy" form
+            // Initialize the location field visibility for "Post Vacancy" form on page load
             toggleLocationField();
         });
     </script>
